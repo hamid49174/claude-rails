@@ -1,7 +1,5 @@
 # claude-rails
 
-[![validate](https://github.com/hamid49174/claude-rails/actions/workflows/validate.yml/badge.svg)](https://github.com/hamid49174/claude-rails/actions/workflows/validate.yml)
-
 The `.claude/` folder I copy into every new project so I stop rewriting the same prompts.
 
 Six subagents, six slash commands, a `CLAUDE.md` skeleton, and a `settings.json` with permissions I trust. Drop it into a repo and Claude Code stops being generic.
@@ -88,7 +86,7 @@ Both are POSIX shell, ~30 lines each, easy to read and edit. They are wired up i
 python scripts/validate.py
 ```
 
-Checks that every agent has `name`, `description`, `tools` frontmatter, every command has `description`, and that the `name` field matches the filename. CI runs this on every push.
+Checks that every agent has `name`, `description`, `tools` frontmatter, every command has `description`, and that the `name` field matches the filename. A GitHub Actions workflow at `.github/workflows/validate.yml` runs the same check on every push.
 
 ## License
 
