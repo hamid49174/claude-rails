@@ -28,8 +28,18 @@
       "Bash(wget:*)"
     ]
   },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": ".claude/hooks/no-dangerous-bash.sh" },
+          { "type": "command", "command": ".claude/hooks/secret-scan.sh" }
+        ]
+      }
+    ]
+  },
   "env": {
-    "BASH_DEFAULT_TIMEOUT_MS": "120000",
-    "CLAUDE_CODE_DISABLE_TELEMETRY": "0"
+    "BASH_DEFAULT_TIMEOUT_MS": "120000"
   }
 }

@@ -1,5 +1,7 @@
 # claude-rails
 
+[![validate](https://github.com/hamid49174/claude-rails/actions/workflows/validate.yml/badge.svg)](https://github.com/hamid49174/claude-rails/actions/workflows/validate.yml)
+
 The `.claude/` folder I copy into every new project so I stop rewriting the same prompts.
 
 Six subagents, six slash commands, a `CLAUDE.md` skeleton, and a `settings.json` with permissions I trust. Drop it into a repo and Claude Code stops being generic.
@@ -8,14 +10,16 @@ Six subagents, six slash commands, a `CLAUDE.md` skeleton, and a `settings.json`
 
 ```
 .claude/
-├── agents/        # specialized subagents Claude delegates to
-├── commands/      # slash commands you invoke directly
-└── hooks/         # event hooks (pre-commit, post-tool-use)
+├── agents/             # six subagents Claude delegates to
+├── commands/           # six slash commands
+└── hooks/              # PreToolUse hooks (secret scan, dangerous-bash guard)
 templates/
-├── CLAUDE.md      # project briefing skeleton
-└── settings.json  # permissions + env defaults
+├── CLAUDE.md           # project briefing skeleton
+└── settings.json       # permissions, hooks, env
 examples/
-└── python-fastapi/  # CLAUDE.md tuned for a real stack
+└── python-fastapi/     # CLAUDE.md tuned for a real stack
+scripts/
+└── validate.py         # checks every agent/command file is well-formed
 ```
 
 ## Install
@@ -68,6 +72,23 @@ This repo is the version of those patterns I actually use. It's small on purpose
 
 - Claude Code ≥ 2.0 (slash command + subagent format, settings.json schema)
 - Works alongside Cursor / Codex CLI — `.claude/` is namespaced
+
+## Hooks
+
+Two `PreToolUse` hooks run before every Bash command:
+
+- **`secret-scan.sh`** — refuses `git commit` / `git add` if the diff contains an AWS key, GitHub PAT, OpenAI key, Slack token, private key block, or hardcoded password.
+- **`no-dangerous-bash.sh`** — refuses `rm -rf /`, `git push --force` without a branch, history rewrites, `--no-verify`, and `curl | sh`.
+
+Both are POSIX shell, ~30 lines each, easy to read and edit. They are wired up in `templates/settings.json`.
+
+## Validate
+
+```bash
+python scripts/validate.py
+```
+
+Checks that every agent has `name`, `description`, `tools` frontmatter, every command has `description`, and that the `name` field matches the filename. CI runs this on every push.
 
 ## License
 
