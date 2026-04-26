@@ -86,7 +86,7 @@ Both are POSIX shell, ~30 lines each, easy to read and edit. They are wired up i
 python scripts/validate.py
 ```
 
-Checks that every agent has `name`, `description`, `tools` frontmatter, every command has `description`, and that the `name` field matches the filename. A GitHub Actions workflow at `.github/workflows/validate.yml` runs the same check on every push.
+Checks that every agent has `name`, `description`, `tools` frontmatter, every command has `description`, and that the `name` field matches the filename. Run it locally; it has no dependencies beyond the Python standard library.
 
 ## License
 
