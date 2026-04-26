@@ -1,8 +1,8 @@
-# claude-code-workflow
+# claude-rails
 
-Opinionated Claude Code setup — plug-and-play subagents, slash commands, and project templates.
+The `.claude/` folder I copy into every new project so I stop rewriting the same prompts.
 
-Drop the `.claude/` directory into any repo and Claude Code immediately knows how to plan, review, debug, and ship code the way you want it to.
+Six subagents, six slash commands, a `CLAUDE.md` skeleton, and a `settings.json` with permissions I trust. Drop it into a repo and Claude Code stops being generic.
 
 ## What's in here
 
@@ -21,10 +21,10 @@ examples/
 ## Install
 
 ```bash
-git clone https://github.com/hamid49174/ai-workflow ~/.claude-workflow
-cp -r ~/.claude-workflow/.claude /your/project/
-cp ~/.claude-workflow/templates/CLAUDE.md /your/project/
-cp ~/.claude-workflow/templates/settings.json /your/project/.claude/
+git clone https://github.com/hamid49174/claude-rails ~/claude-rails
+cp -r ~/claude-rails/.claude /your/project/
+cp ~/claude-rails/templates/CLAUDE.md /your/project/
+cp ~/claude-rails/templates/settings.json /your/project/.claude/
 ```
 
 Restart Claude Code in the project. Run `/help` and the new commands appear under Project.
